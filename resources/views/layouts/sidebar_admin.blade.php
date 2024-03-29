@@ -8,11 +8,11 @@
         <nav class="navbar-sidebar">
             <ul class="list-unstyled navbar__list">
                 <li>
-                    <a class="js-arrow" href="#">
-                        <i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                    <a class="js-arrow " href="#">
+                        <i class="fas fa-tachometer-alt "></i>Dashboard</a>
                 </li>
                 <li>
-                    <a href="chart.html">
+                    <a href="#">
                         <i class="fas fa-chart-bar"></i>Order</a>
                 </li>
                 <li class="has-sub">
@@ -25,12 +25,9 @@
                         <li>
                             <a href="{{url('categories')}}">Categories</a>
                         </li>
-                        <li>
-                            <a href="{{url('admin')}}">Admin</a>
-                        </li>
                     </ul>
                 </li>
-                <li>
+              <!-- <li>
                     <a href="form.html">
                         <i class="far fa-check-square"></i>Forms</a>
                 </li>
@@ -52,9 +49,7 @@
                             <a href="forget-pass.html">Forget Password</a>
                         </li>
                     </ul>
-                </li>
-            </ul>
-            </li>
+                </li>-->
             </ul>
         </nav>
     </div>
