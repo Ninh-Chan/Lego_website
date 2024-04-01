@@ -4,7 +4,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminPanelController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Middleware\CustomerLoginChecking;
+use App\Http\Controllers\HomeController;
 
+
+Route::get('/contace', function (){
+    return view('customers.contact');
+})->name('contact');
 
 Route::get('/', function () {
     return view('customers.index');
@@ -67,3 +72,15 @@ Route::get('/admin_manage-panel', [AdminPanelController::class, 'index'])->name(
 Route::get('dashboard', [App\Http\Controllers\AdminPanelController::class, 'index']);
 
 Route::get('/',[App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::get('chi-tiet-san-pham/{id}',[HomeController::class, 'productDetail'])->name('product_detail');
+
+/*Route::get('chi-tiet-san-pham/{id}',[
+    'as'=> 'chitietsanpham',
+    'uses'=>'Homecontroller@productDetail'
+]);
+
+Route::get('chi-tiet-san-pham/{id}', 'HomeController@productDetail')->name('product_detail');*/
+
+Route::get('Product-type/{id}',[HomeController::class, 'getType'])->name('product_type');

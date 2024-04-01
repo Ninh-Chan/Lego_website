@@ -65,27 +65,6 @@
                                 </div>
                             </div>
 
-                            <div class="cart-item">
-                                <div class="media">
-                                    <a class="pull-left" href="#"><img src="assets/dest/images/products/cart/2.png" alt=""></a>
-                                    <div class="media-body">
-                                        <span class="cart-item-title">Sample Woman Top</span>
-                                        <span class="cart-item-options">Size: XS; Colar: Navy</span>
-                                        <span class="cart-item-amount">1*<span>$49.50</span></span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="cart-item">
-                                <div class="media">
-                                    <a class="pull-left" href="#"><img src="assets/dest/images/products/cart/3.png" alt=""></a>
-                                    <div class="media-body">
-                                        <span class="cart-item-title">Sample Woman Top</span>
-                                        <span class="cart-item-options">Size: XS; Colar: Navy</span>
-                                        <span class="cart-item-amount">1*<span>$49.50</span></span>
-                                    </div>
-                                </div>
-                            </div>
 
                             <div class="cart-caption">
                                 <div class="cart-total text-right">Tổng tiền: <span class="cart-total-value">$34.55</span></div>
@@ -109,16 +88,16 @@
             <div class="visible-xs clearfix"></div>
             <nav class="main-menu">
                 <ul class="l-inline ov">
-                    <li><a href="index.html">Trang chủ</a></li>
+                    <li><a href="{{route('home')}}">Trang chủ</a></li>
                     <li><a href="#">Sản phẩm</a>
                         <ul class="sub-menu">
-                            <li><a href="product_type.html">Sản phẩm 1</a></li>
-                            <li><a href="product_type.html">Sản phẩm 2</a></li>
-                            <li><a href="product_type.html">Sản phẩm 4</a></li>
+                            @foreach($loai_sp as $loai)
+                            <li><a href="{{route('product_type',$loai->id)}}">{{$loai->name}}</a></li>
+                            @endforeach
                         </ul>
                     </li>
                     <li><a href="about.html">Giới thiệu</a></li>
-                    <li><a href="contacts.html">Liên hệ</a></li>
+                    <li><a href="{{route('contact')}}">Liên hệ</a></li>
                 </ul>
                 <div class="clearfix"></div>
             </nav>
@@ -170,7 +149,7 @@
                                     <div class="ribbon-wrapper"><div class="ribbon sale">Sale</div></div>
                                     @endif
                                     <div class="single-item-header">
-                                        <a href="product.html"><img src="uploads/product/{{$new -> image}}" alt="" width="150px" height="300px"></a>
+                                        <a href="{{route('product_detail',[$new ->id])}}"><img src="uploads/product/{{$new -> image}}" alt="" width="150px" height="300px"></a>
                                     </div>
                                     <div class="single-item-body">
                                         <p class="single-item-title">{{$new -> name}}</p>
@@ -185,7 +164,7 @@
                                     </div>
                                     <div class="single-item-caption">
                                         <a class="add-to-cart pull-left" href="shopping_cart.html"><i class="fa fa-shopping-cart"></i></a>
-                                        <a class="beta-btn primary" href="product.html">Details <i class="fa fa-chevron-right"></i></a>
+                                        <a class="beta-btn primary" href="{{route('product_detail',[$new ->id])}}">Details <i class="fa fa-chevron-right"></i></a>
                                         <div class="clearfix"></div>
                                     </div>
                                 </div>
@@ -201,13 +180,17 @@
 
                     <div class="beta-products-list">
                         <h4>Sản phẩm Khuyến mại</h4>
+                        <div class="beta-products-details">
+                            <p class="pull-left">Tìm thấy {{count($promotion_product)}} sản phẩm</p>
+                            <div class="clearfix"></div>
+                        </div>
                         <div class="row">
                             @foreach($promotion_product as $pro)
                                 <div class="col-sm-3">
                                     <div class="single-item">
                                             <div class="ribbon-wrapper"><div class="ribbon sale">Sale</div></div>
                                         <div class="single-item-header">
-                                            <a href="product.html"><img src="uploads/product/{{$pro -> image}}" alt="" width="150px" height="300px"></a>
+                                            <a href="{{route('product_detail',[$pro ->id])}}"><img src="uploads/product/{{$pro -> image}}" alt="" width="150px" height="300px"></a>
                                         </div>
                                         <div class="single-item-body">
                                             <p class="single-item-title">{{$pro -> name}}</p>
@@ -218,7 +201,7 @@
                                         </div>
                                         <div class="single-item-caption">
                                             <a class="add-to-cart pull-left" href="shopping_cart.html"><i class="fa fa-shopping-cart"></i></a>
-                                            <a class="beta-btn primary" href="product.html">Details <i class="fa fa-chevron-right"></i></a>
+                                            <a class="beta-btn primary" href="{{route('product_detail',[$pro ->id])}}">Details <i class="fa fa-chevron-right"></i></a>
                                             <div class="clearfix"></div>
                                         </div>
                                     </div>
@@ -244,6 +227,7 @@
             <div class="col-sm-3">
                 <div class="widget">
                     <h4 class="widget-title">Instagram Feed</h4>
+                    <img src="uploads/logo.png">
                     <div id="beta-instagram-feed"><div></div></div>
                 </div>
             </div>
