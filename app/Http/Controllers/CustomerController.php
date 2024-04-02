@@ -2,133 +2,84 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CustomerStoreRequest;
-use Illuminate\Http\Request;
 use App\Models\Customer;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Redirect;
 
-class CustomerController extends Controller
+class CustomerController
 {
-
-    public function register()
+    public function index()
     {
-        return view('customers.register');
+        $customers = Customer::get();
+        return view('admin.customer.index', compact('customers'));
     }
 
-    public function processingRegister(CustomerStoreRequest $request)
+    public function create()
     {
-        if ($request->validated()) {
-            $array = [];
-            $array = Arr::add($array, 'customer_name', $request->customer_name);
-            $array = Arr::add($array, 'customer_phone_number', $request->customer_phone_number);
-            $array = Arr::add($array, 'customer_email', $request->customer_email);
-            $array = Arr::add($array, 'customer_password', Hash::make($request->customer_password));
-            $array = Arr::add($array, 'customer_address', $request->customer_address);
-            $array = Arr::add($array, 'status', 1);
-            //Lấy dữ liệu từ form và lưu lên db
-            Customer::create($array);
-
-            return Redirect::route('customer.login');
-        } else {
-            //cho quay về trang login
-            return Redirect::back('info');
-        }
+        return view('admin.customer.create');
     }
 
-        public function login()
-        {
-            return view('customers.login');
-        }
-
-    public function loginProcess(Request $request)
+    public function store(Request $request)
     {
-        $account = $request->only(['customer_email', 'customer_password']);
-        $check = Auth::guard('customers')->attempt($account);
-
-        if ($check) {
-            //Lấy thông tin của customers đang login
-            $customers = Auth::guard('customers')->user();
-            //Cho login
-            Auth::guard('customers')->login($customers);
-            //Ném thông tin customers đăng nhập lên session
-            session(['customers' => $customers]);
-            return Redirect::route('info');
-        } else {
-            //cho quay về trang login
-            return Redirect::back();
-        }
-    }
-
-    public function logout()
-    {
-        Auth::guard('customers')->logout();
-        session()->forget('customers');
-        return view('customers.logoutConfirm');
-    }
-
-    public function passwordForget()
-    {
-        return view('customers.login');
-    }
-
-    public function editInfo()
-    {
-        //id cua customers dang dang nhap
-        $id = Auth::guard('customer')->user()->id;
-        //lay ban ghi
-        $customer = Customer::find($id);
-        return view('customers.profiles.info', [
-            'customer' => $customer
+        $request->validate([
+            'name' => 'required|max:255|string',
+            'phone_number'=>'required|string',
+            'email'=>'required|max:100|string',
+            'password'=>'required|max:50|string',
+            'address'=>'required|max:255|string'
         ]);
+
+
+        Customer::create([
+            'name' => $request->name,
+            'email'=>$request->email,
+            'phone_number'=>$request->phone_number,
+            'password'=>Hash::make($request->password),
+            'address'=>$request->address
+        ]);
+
+        return redirect('customers')->with('status', 'Customers Created !');
     }
 
-    public function updateProfile(UpdateCustomerRequest $request)
+    public function edit(int $id)
     {
-        //Lấy dữ liệu trong form và update lên db
-        $array = [];
-        $array = Arr::add($array, 'customer_name', $request->customer_name);
-        $array = Arr::add($array, 'customer_phone_number', $request->customer_phone_number);
-        $array = Arr::add($array, 'customer_email', $request->customer_email);
-        $array = Arr::add($array, 'customer_password', $request->customer_password);
-        $array = Arr::add($array, 'customer_address', $request->customer_address);
-
-        //id cua customers dang dang nhap
-        $id = Auth::guard('customer')->user()->id;
-        //lay ban ghi
-        $customer = Customer::find($id);
-        $customer->update($array);
-        //Quay về danh sách
-        return Redirect::route('info');
+        $customer = Customer::findOrFail($id);
+        // return $brand;
+        return view('admin.customer.edit', compact('customer'));
     }
 
-        public function editPassword()
-        {
-            //id cua customers dang dang nhap
-            $id = Auth::guard('customers')->user()->id;
-            //lay ban ghi
-            $customer = Customer::find($id);
-            return view('customers.profiles.changePassword', [
-            'customer' => $customer
-            ]);
-        }
-
-        public function updatePassword(UpdateCustomerRequest $request)
+    public function update(Request $request, int $id)
     {
-        $newPwd = Hash::make($request->new_pwd);
-        $newPwd2 = $request->new_pwd2;
+        $request->validate([
+            'name' => 'required|max:255|string',
+            'phone_number'=>'required|string',
+            'email'=>'required|max:100|string',
+            'address'=>'required|max:255|string'
+        ]);
 
-        $array = [];
-        $array = Arr::add($array, 'customer_password', $newPwd);
-        //id cua customers dang dang nhap
-        $id = Auth::guard('customer')->user()->id;
-        //lay ban ghi
-        $customer = Customer::find($id);
-        $customer->update($array);
+        $product = Customer::findOrFail($id);
 
-        return Redirect::route('pwd.update');
+
+        $product->update([
+            'name' => $request->name,
+            'email'=>$request->email,
+            'phone_number'=>$request->phone_number,
+            'address'=>$request->address
+        ]);
+
+        return redirect()->back()->with('status', 'Customer Updated !');
+    }
+
+    public function destroy(int $id)
+    {
+        $customers = Customer::findOrFail($id);
+
+        $customers->delete();
+
+        return redirect()->back()->with('status', 'Customer Deleted !');
     }
 }
+
+
+
+

@@ -12,11 +12,11 @@
 
                     <!-- Admin -->
                     <h3 class="text-lg font-semibold mb-4">Admin</h3>
-                    <!-- Your admin-related content here -->
+                    <!-- Your admin_manage-related content here -->
 
                     <!-- Customer -->
                     <h3 class="text-lg font-semibold mb-4">Customer</h3>
-                    <!-- Your customers-related content here -->
+                    <!-- Your customer-related content here -->
 
                     <!-- Brand -->
                     <h3 class="text-lg font-semibold mb-4">Brand</h3>

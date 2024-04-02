@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Admin extends Model
 {
     use HasFactory;
-    public $timestamps = false;
+
     protected $primaryKey = "id";
 
     protected $table = 'admins';
@@ -21,6 +21,6 @@ class Admin extends Model
     ];
 
     protected $hidden = [
-        'admin_password', // Ẩn mật khẩu admin khi trả về dữ liệu
+        'admin_password', // Ẩn mật khẩu admin_manage khi trả về dữ liệu
     ];
 }
