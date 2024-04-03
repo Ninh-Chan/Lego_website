@@ -80,7 +80,7 @@ class ProductController extends Controller
             'number_of_part' => 'required|integer',
             'image' => 'required|mimes:ong,jpg,jpeg,webp',
             'description' => 'required|text',
-            'category_id' => 'required|integer',
+            'brand_id' => 'required|integer',
             'product_type_id' => 'required|integer',
         ]);
 
@@ -108,7 +108,8 @@ class ProductController extends Controller
             'number_of_part' => $request->number_of_part,
             'image' => $path.$filename,
             'description' => $request->description,
-            'category_id' => $request->category_id,
+            'brand_id' => $request->brand_id
+                         ,
             'product_type_id' => $request->product_type_id,
         ]);
 
