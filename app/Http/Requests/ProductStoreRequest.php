@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Requests;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 class ProductStoreRequest extends FormRequest
@@ -24,7 +24,9 @@ class ProductStoreRequest extends FormRequest
     {
         return [
             'name' => ['required'],
+            'new' => ['required'],
             'price' => ['required', 'regex:/^[0-9]+[0-9.]*$/', 'min:0.1'],
+            'promotion_price' => ['required', 'regex:/^[0-9]+[0-9.]*$/', 'min:0.1'],
             'quantity' => ['required', 'min:1'],
             'number_of_part' => ['required'],
             'image' => ['required', 'min:1'],
@@ -36,9 +38,13 @@ class ProductStoreRequest extends FormRequest
     {
         return [
             'product_name.required' => 'Name is required',
+            'new.required' => 'Quality is required',
             'price.required' => 'Price is required',
             'price.regex' => 'Price is not correct format',
             'price.min' => 'Price is higher than 0.1',
+            'promotion_price.required' => 'Price is required',
+            'promotion_price.regex' => 'Price is not correct format',
+            'promotion_price.min' => 'Price is higher than 0.1',
             'quantity.required' => 'Quantity is required',
             'quantity.regex' => 'Quantity is not correct format',
             'quantity.min' => 'Quantity is higher than 0',
