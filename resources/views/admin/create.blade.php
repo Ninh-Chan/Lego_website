@@ -24,39 +24,33 @@
 
                             <div class="mb-4">
                                 <label>Admin Name</label>
-                                <input type="text" name="admin_name" class="form-control"
-                                       value="{{ old('admin_name') }}" required>
-                                @error('admin_name')<span class="text-danger">{{ $message }}</span>@enderror
+                                <input type="text" name="name" class="form-control"
+                                       value="{{ old('v') }}" required>
+                                @error('name')<span class="text-danger">{{ $message }}</span>@enderror
                             </div>
 
                             <!-- Phone Number field -->
                             <div class="mb-4">
                                 <label>Phone Number</label>
-                                <input type="number" name="admin_phone_number" class="form-control"
-                                       value="{{ old('admin_phone_number') }}" required>
-                                @error('admin_phone_number')<span class="text-danger">{{ $message }}</span>@enderror
+                                <input type="number" name="phone_number" class="form-control"
+                                       value="{{ old('phone_number') }}" required>
+                                @error('phone_number')<span class="text-danger">{{ $message }}</span>@enderror
                             </div>
 
                             <!-- Email field -->
                             <div class="mb-4">
                                 <label>Admin email</label>
-                                <input type="email" name="admin_email" class="form-control"
-                                       value="{{ old('admin_email') }}" required>
-                                @error('admin_email')<span class="text-danger">{{ $message }}</span>@enderror
+                                <input type="email" name="email" class="form-control"
+                                       value="{{ old('email') }}" required>
+                                @error('email')<span class="text-danger">{{ $message }}</span>@enderror
                             </div>
 
                             <!-- Password field -->
                             <div class="mb-4">
                                 <label>Admin password</label>
-                                <input type="password" name="admin_password" class="form-control"
-                                       value="{{ old('admin_password') }}" required>
-                                @error('admin_password')<span class="text-danger">{{ $message }}</span>@enderror
-                            </div>
-
-                            <div class="mb-4">
-                                <label>Status</label>
-                                <input type="checkbox" name="is_active" {{ old('is_active') == true ? 'checked':'' }}/>
-                                @error('is_active')<span class="text-danger">{{ $message }}</span>@enderror
+                                <input type="password" name="password" class="form-control"
+                                       value="{{ old('password') }}" required>
+                                @error('password')<span class="text-danger">{{ $message }}</span>@enderror
                             </div>
 
                             <!-- Submit button -->

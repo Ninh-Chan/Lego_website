@@ -5,14 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use function PHPUnit\Framework\once;
 
 class BrandController extends Controller
 {
     public function index()
     {
-        $brand = Brand::get();
-        return view('admin.brand.index', compact('brand'));
+        $brands = Brand::get();
+        return view('admin.brand.index', compact('brands'));
     }
 
     public function create()
@@ -24,11 +23,23 @@ class BrandController extends Controller
     {
         $request->validate([
             'name' => 'required|max:255|string',
+            'image' => 'nullable|mimes:png,jpeg,webp',
         ]);
 
+        if($request->has('image')){
+
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+
+            $filename = time().'.'.$extension;
+
+            $path = 'uploads/brand/';
+            $file->move($path, $filename);
+        }
 
         Brand::create([
             'name' => $request->name,
+            'image' => $path.$filename,
         ]);
 
         return redirect('brands/create')->with('status','Brand Created !');
@@ -38,15 +49,14 @@ class BrandController extends Controller
     {
         $brand = Brand::findOrFail($id);
         // return $brand;
-        return view('brand.edit', compact('brand'));
+        return view('admin.brand.edit', compact('brand'));
     }
 
     public function update(Request $request, int $id)
     {
         $request->validate([
             'name' => 'required|max:255|string',
-            'image' => 'required|mimes:png,jpg,jpeg,webp',
-            'is_active' => 'sometimes'
+            'image' => 'required|mimes:ong,jpg,jpeg,webp',
         ]);
 
         $brand = Brand::findOrFail($id);
@@ -65,13 +75,14 @@ class BrandController extends Controller
                 File::delete($brand->image);
             }
         }
-        Brand::findorFail($id)->update([
+
+        $brand->update([
             'name' => $request->name,
             'image' => $path.$filename,
-            'is_active' => $request->is_active == true ? 1:0,
+            //'is_active' => $request->is_active == true ? 1:0,
         ]);
 
-        return redirect('brands')->with('status','Brand Updated !');
+        return redirect()->back()->with('status','Brand Updated !');
     }
 
     public function destroy(int $id)
@@ -83,6 +94,6 @@ class BrandController extends Controller
 
         $brand->delete();
 
-        return redirect('brands')->with('status','Brand Deleted !');
+        return redirect()->back()->with('status','Brand Deleted !');
     }
 }

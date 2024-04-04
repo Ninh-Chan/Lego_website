@@ -7,6 +7,7 @@ use App\Models\Brand;
 use App\Models\ProductType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
@@ -31,7 +32,9 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required|string',
+            'new' => 'required|integer',
             'price' => 'required|string',
+            'promotion_price' => 'required|string',
             'quantity' => 'required|integer',
             'number_of_part' => 'required|integer',
             'description' => 'required|string',
@@ -53,7 +56,9 @@ class ProductController extends Controller
 
         Product::create([
             'name' => $request->name,
+            'new' => $request->new,
             'price' => $request->price,
+            'promotion_price' => $request->promotion_price,
             'quantity' => $request->quantity,
             'number_of_part' => $request->number_of_part,
             'image' => $path.$filename,
@@ -66,16 +71,18 @@ class ProductController extends Controller
 
     public function edit(int $id)
     {
-        $product = Product::findOrFail($id);
+        $products = Product::findOrFail($id);
         // return $brand;
-        return view('admin.product.edit', compact('product'));
+        return view('admin.product.edit', compact('products'));
     }
 
     public function update(Request $request, int $id)
     {
         $request->validate([
             'name' => 'required|max:255|string',
+            'new' => 'required|integer',
             'price' => 'required|decimal',
+            'promotion_price' => 'required|integer',
             'quantity' => 'required|integer',
             'number_of_part' => 'required|integer',
             'image' => 'required|mimes:ong,jpg,jpeg,webp',
@@ -84,7 +91,7 @@ class ProductController extends Controller
             'product_type_id' => 'required|integer',
         ]);
 
-        $product = Product::findOrFail($id);
+        $products = Product::findOrFail($id);
 
         if($request->has('image')){
 
@@ -96,20 +103,21 @@ class ProductController extends Controller
             $path = 'uploads/product/';
             $file->move($path, $filename);
 
-            if(File::exists($product->image)){
-                File::delete($product->image);
+            if(File::exists($products->image)){
+                File::delete($products->image);
             }
         }
 
-        $product->update([
+        $products->update([
             'name' => $request->name,
+            'new' => $request->new,
             'price' => $request->price,
+            'promotion_price' => $request->promotion_price,
             'quantity' => $request->quantity,
             'number_of_part' => $request->number_of_part,
             'image' => $path.$filename,
             'description' => $request->description,
-            'brand_id' => $request->brand_id
-                         ,
+            'brand_id' => $request->brand_id,
             'product_type_id' => $request->product_type_id,
         ]);
 
@@ -118,11 +126,11 @@ class ProductController extends Controller
 
     public function destroy(int $id)
     {
-        $product = Product::findOrFail($id);
-        if(File::exists($product->image)){
-            File::delete($product->image);
+        $products = Product::findOrFail($id);
+        if(File::exists($products->image)){
+            File::delete($products->image);
         }
-        $product->delete();
+        $products->delete();
 
         return redirect()->back()->with('status','Product Deleted !');
     }

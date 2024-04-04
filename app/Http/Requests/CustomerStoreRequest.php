@@ -24,26 +24,25 @@ class CustomerStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'customer_name' => ['required'],
-            'customer_phone_number' => ['required'],
-            'customer_email' => ['required'],
-            'customer_password' => ['required'],
-            'customer_address' => ['required'],
-            'status' => ['required'],
+            'name' => ['required'],
+            'phone_number' => ['required'],
+            'email' => ['required'],
+            'password' => ['required'],
+            'address' => ['required'],
         ];
     }
 
     public function messages()
     {
         return [
-            'customer_name.required' => 'Name is required',
-            'customer_name.regex' => 'Name is not correct format',
-            'customer_phone_number.required' => 'Phone is required',
-            'customer_phone_number.regex' => 'Phone is not correct format',
-            'customer_email.required' => 'Email is required',
-            'customer_password.required' => 'Password is required',
-            'customer_address.required' => 'Address is required',
-            'status.required' => 'Status is required',
+            'name.required' => 'Name is required',
+            'name.regex' => 'Name is not correct format',
+            'phone_number.required' => 'Phone is required',
+            'phone_number.regex' => 'Phone is not correct format',
+            'email.required' => 'Email is required',
+            'password.required' => 'Password is required',
+            'address.required' => 'Address is required',
+            //'status.required' => 'Status is required',
         ];
     }
 }

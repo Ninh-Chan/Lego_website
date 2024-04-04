@@ -51,73 +51,88 @@
     <div class="main-content">
         <div class="section__content section__content--p30">
             <div class="container-fluid">                        <h4> Edit Products
-                            <a href="{{ url('products') }}" class="btn btn-primary float-end">Back</a>
-                        </h4>
-                    </div>
-                        <form action="{{ url('products/'.$product->id.'/edit') }}" method="POST">
-                            @csrf
-                            @method('PUT')
+                    <a href="{{ url('products') }}" class="btn btn-primary float-end">Back</a>
+                </h4>
+            </div>
+            <form action="{{ url('products/'.$products->id.'/edit') }}" method="POST">
+                @csrf
+                @method('PUT')
 
-                            <div class="mb-4">
-                                <label for="name" class="block text-sm font-medium text-gray-700">Product Name</label>
-                                <input type="text" name="name" id="name" value="{{ $product->name }}" class="form-input rounded-md shadow-sm mt-1 block w-full" required>
-                                @error('name')<span class="text-danger">{{ $message }}</span>@enderror
-                            </div>
+                <div class="mb-4">
+                    <label for="name" class="block text-sm font-medium text-gray-700">Product Name</label>
+                    <input type="text" name="name" id="name" value="{{ $products->name }}" class="form-input rounded-md shadow-sm mt-1 block w-full" required>
+                    @error('name')<span class="text-danger">{{ $message }}</span>@enderror
+                </div>
 
-                            <div class="mb-4">
-                                <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
-                                <input type="number" name="price" id="price" value="{{ $product->price }}" class="form-input rounded-md shadow-sm mt-1 block w-full" required>
-                                @error('price')<span class="text-danger">{{ $message }}</span>@enderror
-                            </div>
+                <div class="mb-4">
+                    <label for="name" class="block text-sm font-medium text-gray-700">Product Name</label>
+                    <input type="text" name="new" id="new" value="{{ $products->new }}" class="form-input rounded-md shadow-sm mt-1 block w-full" required>
+                    @error('new')<span class="text-danger">{{ $message }}</span>@enderror
+                </div>
 
-                            <div class="mb-4">
-                                <label for="quantity" class="block text-sm font-medium text-gray-700">Quantity</label>
-                                <input type="number" name="quantity" id="quantity" value="{{ $product->price }}" class="form-input rounded-md shadow-sm mt-1 block w-full" required>
-                                @error('quantity')<span class="text-danger">{{ $message }}</span>@enderror
-                            </div>
+                <div class="mb-4">
+                    <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
+                    <input type="number" name="price" id="price" value="{{ $products->price }}" class="form-input rounded-md shadow-sm mt-1 block w-full" required>
+                    @error('price')<span class="text-danger">{{ $message }}</span>@enderror
+                </div>
 
-                            <div class="mb-4">
-                                <label for="number_of_part" class="block text-sm font-medium text-gray-700">Number of parts</label>
-                                <input type="number" name="number_of_part" id="number_of_part" value="{{ $product->number_of_part }}" class="form-input rounded-md shadow-sm mt-1 block w-full" required>
-                                @error('number_of_part')<span class="text-danger">{{ $message }}</span>@enderror
-                            </div>
+                <div class="mb-4">
+                    <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
+                    <input type="number" name="promotion_price" id="promotion_price" value="{{ $products->promotion_price }}"
+                     class="form-input rounded-md shadow-sm mt-1 block w-full" required>
+                    @error('price')<span class="text-danger">{{ $message }}</span>@enderror
+                </div>
 
-                            <div class="mb-4">
-                                <label>Upload File/Image</label>
-                                <input type="file" name="image" class="form-control"/>
-                            </div>
+                <div class="mb-4">
+                    <label for="quantity" class="block text-sm font-medium text-gray-700">Quantity</label>
+                    <input type="number" name="quantity" id="quantity" value="{{ $products->price }}" class="form-input rounded-md shadow-sm mt-1 block w-full" required>
+                    @error('quantity')<span class="text-danger">{{ $message }}</span>@enderror
+                </div>
 
-                            <div class="mb-4">
-                                <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
-                                <textarea name="description" class="form-control" rows="3" >{{ $product->description }}</textarea>
-                                @error('description')<span class="text-danger">{{ $message }}</span>@enderror
-                            </div>
+                <div class="mb-4">
+                    <label for="number_of_part" class="block text-sm font-medium text-gray-700">Number of parts</label>
+                    <input type="number" name="number_of_part" id="number_of_part" value="{{ $products->number_of_part }}" class="form-input rounded-md shadow-sm mt-1 block w-full" required>
+                    @error('number_of_part')<span class="text-danger">{{ $message }}</span>@enderror
+                </div>
 
-                            <div class="mb-4">
-                                <label for="category_id" class="block text-sm font-medium text-gray-700">Product brand</label>
-                                <input type="" name="category_id" id="" value="{{ $product->category_id }}" class="form-input rounded-md shadow-sm mt-1 block w-full" required>
-                                @error('category_id')<span class="text-danger">{{ $message }}</span>@enderror
-                            </div>
+                <div class="mb-4">
+                    <label>Upload File/Image</label>
+                    <input type="file" name="image" class="form-control"/>
+                </div>
 
-                            <div class="mb-4">
-                                <label for="product_type_id" class="block text-sm font-medium text-gray-700">Product type</label>
-                                <input type="" name="product_type_id" id="" value="{{ $product->product_type_id }}" class="form-input rounded-md shadow-sm mt-1 block w-full" required>
-                                @error('product_type_id')<span class="text-danger">{{ $message }}</span>@enderror
-                            </div>
+                <div class="mb-4">
+                    <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                    <textarea name="description" class="form-control" rows="3" >{{ $products->description }}</textarea>
+                    @error('description')<span class="text-danger">{{ $message }}</span>@enderror
+                </div>
 
-                            <div class="mb-4">
-                                <label>Status</label>
-                                <input type="checkbox" name="is_active" {{ $admin->'is_active' == true ? 'checked':'' }}/>
-                                @error('is_active')<span class="text-danger">{{ $message }}</span>@enderror
-                            </div>
+                <div class="mb-4">
+                    <select name="brand_id" id="brand" class="form-select" required>
+                        @foreach($brands as $brand)
+                            <option
+                                value="{{$brand->id}}"{{$products->$brand == $brand->id ? 'selected' : ''}}>
+                                {{$brand->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
 
-                            <div class="flex items-center justify-end mt-4">
-                                <button type="submit"
-                                        class="inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:border-blue-900 focus:ring focus:ring-blue-200 disabled:opacity-25 transition">
-                                    Update
-                                </button>
-                            </div>
-                        </form>
+                <div class="mb-4">
+                    <select name="product_type_id" id="product_type" class="form-select" required>
+                        @foreach($types as $type)
+                            <option
+                                value="{{$type->id}}"{{$products->products_type_id == $type->id ? 'selected' : ''}}>
+                                {{$type->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="flex items-center justify-end mt-4">
+                    <button type="submit"
+                            class="inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:border-blue-900 focus:ring focus:ring-blue-200 disabled:opacity-25 transition">
+                        Update
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

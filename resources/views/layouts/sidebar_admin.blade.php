@@ -23,13 +23,7 @@
                             <a href="{{ url('products')}}">Products</a>
                         </li>
                         <li>
-                            <a href="{{url('brands')}}">Brands</a>
-                        </li>
-                        <li>
-                            <a href="{{url('customers')}}">Customers</a>
-                        </li>
-                        <li>
-                            <a href="{{url('product_types')}}">Product Type</a>
+                            <a href="{{url('categories')}}">Categories</a>
                         </li>
                     </ul>
                 </li>

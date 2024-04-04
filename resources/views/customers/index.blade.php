@@ -28,9 +28,9 @@
             </div>
             <div class="pull-right auto-width-right">
                 <ul class="top-details menu-beta l-inline">
-                    <li><a href="#"><i class="fa fa-user"></i>Tài khoản</a></li>
-                    <li><a href="#">Đăng kí</a></li>
-                    <li><a href="#">Đăng nhập</a></li>
+                    <li><a href="{{route('info')}}"><i class="fa fa-user"></i>Tài khoản</a></li>
+                    <li><a href="{{route('customers.register')}}}">Đăng kí</a></li>
+                    <li><a href="{{route('customers.login')}}">Đăng nhập</a></li>
                 </ul>
             </div>
             <div class="clearfix"></div>
@@ -39,7 +39,7 @@
     <div class="header-body">
         <div class="container beta-relative">
             <div class="pull-left">
-                <a href="index.html" id="logo"><img src="{{asset('uploads/logo.png')}}" height="100px" width="150px" alt=""></a>
+                <a href="{{route('home')}}" id="logo"><img src="{{asset('uploads/logo.png')}}" height="100px" width="150px" alt=""></a>
             </div>
             <div class="pull-right beta-components space-left ov">
                 <div class="space10">&nbsp;</div>
@@ -65,6 +65,27 @@
                                 </div>
                             </div>
 
+                            <div class="cart-item">
+                                <div class="media">
+                                    <a class="pull-left" href="#"><img src="assets/dest/images/products/cart/2.png" alt=""></a>
+                                    <div class="media-body">
+                                        <span class="cart-item-title">Sample Woman Top</span>
+                                        <span class="cart-item-options">Size: XS; Colar: Navy</span>
+                                        <span class="cart-item-amount">1*<span>$49.50</span></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="cart-item">
+                                <div class="media">
+                                    <a class="pull-left" href="#"><img src="assets/dest/images/products/cart/3.png" alt=""></a>
+                                    <div class="media-body">
+                                        <span class="cart-item-title">Sample Woman Top</span>
+                                        <span class="cart-item-options">Size: XS; Colar: Navy</span>
+                                        <span class="cart-item-amount">1*<span>$49.50</span></span>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="cart-caption">
                                 <div class="cart-total text-right">Tổng tiền: <span class="cart-total-value">$34.55</span></div>
@@ -91,13 +112,13 @@
                     <li><a href="{{route('home')}}">Trang chủ</a></li>
                     <li><a href="#">Sản phẩm</a>
                         <ul class="sub-menu">
-                            @foreach($loai_sp as $loai)
-                            <li><a href="{{route('product_type',$loai->id)}}">{{$loai->name}}</a></li>
-                            @endforeach
+                            <li><a href="product_type.html">Sản phẩm 1</a></li>
+                            <li><a href="product_type.html">Sản phẩm 2</a></li>
+                            <li><a href="product_type.html">Sản phẩm 4</a></li>
                         </ul>
                     </li>
                     <li><a href="about.html">Giới thiệu</a></li>
-                    <li><a href="{{route('contact')}}">Liên hệ</a></li>
+                    <li><a href="contacts.html">Liên hệ</a></li>
                 </ul>
                 <div class="clearfix"></div>
             </nav>
@@ -143,32 +164,138 @@
 
                         <div class="row">
                             @foreach($new_product as $new)
-                            <div class="col-sm-3">
-                                <div class="single-item">
-                                    @if($new-> promotion_price != 0)
-                                    <div class="ribbon-wrapper"><div class="ribbon sale">Sale</div></div>
-                                    @endif
-                                    <div class="single-item-header">
-                                        <a href="{{route('product_detail',[$new ->id])}}"><img src="uploads/product/{{$new -> image}}" alt="" width="150px" height="300px"></a>
-                                    </div>
-                                    <div class="single-item-body">
-                                        <p class="single-item-title">{{$new -> name}}</p>
-                                        <p class="single-item-price">
-                                            @if($new-> promotion_price == 0)
-                                            <span class="flash-del">{{$new -> price}}$</span>
-                                            @else
-                                                <span class="flash-del">{{$new -> price}}$</span>
-                                                <span class="flash-sale">{{$new -> promotion_price}}$</span>
-                                            @endif
-                                        </p>
-                                    </div>
-                                    <div class="single-item-caption">
-                                        <a class="add-to-cart pull-left" href="shopping_cart.html"><i class="fa fa-shopping-cart"></i></a>
-                                        <a class="beta-btn primary" href="{{route('product_detail',[$new ->id])}}">Details <i class="fa fa-chevron-right"></i></a>
-                                        <div class="clearfix"></div>
+                                <div class="col-sm-3">
+                                    <div class="single-item">
+                                        @if($new->promotion_price != 0)
+                                            <div class="ribbon-wrapper"><div class="ribbon sale">Sale</div></div>
+                                        @endif
+                                        <div class="single-item-header">
+                                            <a href="product.html"><img src="uploads/product/{{$new->image}}" alt="" width="200px" height="160px"></a>
+                                        </div>
+                                        <div class="single-item-body">
+                                            <p class="single-item-title">{{$new->name}}</p>
+                                            <p class="single-item-price">
+                                                @if($new->promotion_price == 0)
+                                                    <span class="flash-del">{{$new->price}}$</span>
+                                                @else
+                                                    <span class="flash-del">{{$new->price}}$</span>
+                                                    <span class="flash-sale">{{$new->promotion_price}}$</span>
+                                                @endif
+                                            </p>
+                                        </div>
+                                        <div class="single-item-caption">
+                                            <a class="add-to-cart pull-left" href="shopping_cart.html"><i class="fa fa-shopping-cart"></i></a>
+                                            <a class="beta-btn primary" href="{{ route('product_detail', ['id' => $new->id]) }}">Details <i class="fa fa-chevron-right"></i></a>
+                                            <div class="clearfix"></div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endforeach
+                        </div>
+
+                        <div class="row">
+                            @foreach($new_product as $new)
+                                <div class="col-sm-3">
+                                    <div class="single-item">
+                                        @if($new->promotion_price != 0)
+                                            <div class="ribbon-wrapper"><div class="ribbon sale">Sale</div></div>
+                                        @endif
+                                        <div class="single-item-header">
+                                            <a href="product.html"><img src="uploads/product/{{$new->image}}" alt="" width="200px" height="160px"></a>
+                                        </div>
+                                        <div class="single-item-body">
+                                            <p class="single-item-title">{{$new->name}}</p>
+                                            <p class="single-item-price">
+                                                @if($new->promotion_price == 0)
+                                                    <span class="flash-del">{{$new->price}}$</span>
+                                                @else
+                                                    <span class="flash-del">{{$new->price}}$</span>
+                                                    <span class="flash-sale">{{$new->promotion_price}}$</span>
+                                                @endif
+                                            </p>
+                                        </div>
+                                        <div class="single-item-caption">
+                                            <a class="add-to-cart pull-left" href="shopping_cart.html"><i class="fa fa-shopping-cart"></i></a>
+                                            <a class="beta-btn primary" href="{{ route('product_detail', ['id' => $new->id]) }}">Details <i class="fa fa-chevron-right"></i></a>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+
+                        <div class="row">
+                            @foreach($promotion_product as $pro)
+                                <div class="col-sm-3">
+                                    <div class="single-item">
+                                        <div class="ribbon-wrapper"><div class="ribbon sale">Sale</div></div>
+                                        <div class="single-item-header">
+                                            <a href="product.html"><img src="uploads/product/{{$pro->image}}" alt="" width="150px" height="300px"></a>
+                                        </div>
+                                        <div class="single-item-body">
+                                            <p class="single-item-title">{{$pro->name}}</p>
+                                            <p class="single-item-price">
+                                                <span class="flash-del">{{$pro->price}}$</span>
+                                                <span class="flash-sale">{{$pro->promotion_price}}$</span>
+                                            </p>
+                                        </div>
+                                        <div class="single-item-caption">
+                                            <a class="add-to-cart pull-left" href="shopping_cart.html"><i class="fa fa-shopping-cart"></i></a>
+                                            <a class="beta-btn primary" href="{{ route('product_detail', ['id' => $pro->id]) }}">Details <i class="fa fa-chevron-right"></i></a>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+
+                        <div class="row">
+                            @foreach($promotion_product as $pro)
+                                <div class="col-sm-3">
+                                    <div class="single-item">
+                                        <div class="ribbon-wrapper"><div class="ribbon sale">Sale</div></div>
+                                        <div class="single-item-header">
+                                            <a href="product.html"><img src="uploads/product/{{$pro->image}}" alt="" width="150px" height="300px"></a>
+                                        </div>
+                                        <div class="single-item-body">
+                                            <p class="single-item-title">{{$pro->name}}</p>
+                                            <p class="single-item-price">
+                                                <span class="flash-del">{{$pro->price}}$</span>
+                                                <span class="flash-sale">{{$pro->promotion_price}}$</span>
+                                            </p>
+                                        </div>
+                                        <div class="single-item-caption">
+                                            <a class="add-to-cart pull-left" href="shopping_cart.html"><i class="fa fa-shopping-cart"></i></a>
+                                            <a class="beta-btn primary" href="{{ route('product_detail', ['id' => $pro->id]) }}">Details <i class="fa fa-chevron-right"></i></a>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+
+                        <div class="row">
+                            @foreach($promotion_product as $pro)
+                                <div class="col-sm-3">
+                                    <div class="single-item">
+                                        <div class="ribbon-wrapper"><div class="ribbon sale">Sale</div></div>
+                                        <div class="single-item-header">
+                                            <a href="product.html"><img src="uploads/product/{{$pro->image}}" alt="" width="150px" height="300px"></a>
+                                        </div>
+                                        <div class="single-item-body">
+                                            <p class="single-item-title">{{$pro->name}}</p>
+                                            <p class="single-item-price">
+                                                <span class="flash-del">{{$pro->price}}$</span>
+                                                <span class="flash-sale">{{$pro->promotion_price}}$</span>
+                                            </p>
+                                        </div>
+                                        <div class="single-item-caption">
+                                            <a class="add-to-cart pull-left" href="shopping_cart.html"><i class="fa fa-shopping-cart"></i></a>
+                                            <a class="beta-btn primary" href="{{ route('product_detail', ['id' => $pro->id]) }}">Details <i class="fa fa-chevron-right"></i></a>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
                             @endforeach
                         </div>
                         <div class="row">
@@ -180,28 +307,55 @@
 
                     <div class="beta-products-list">
                         <h4>Sản phẩm Khuyến mại</h4>
-                        <div class="beta-products-details">
-                            <p class="pull-left">Tìm thấy {{count($promotion_product)}} sản phẩm</p>
-                            <div class="clearfix"></div>
-                        </div>
                         <div class="row">
-                            @foreach($promotion_product as $pro)
+                            @foreach($new_product as $new)
                                 <div class="col-sm-3">
                                     <div class="single-item">
+                                        @if($new->promotion_price != 0)
                                             <div class="ribbon-wrapper"><div class="ribbon sale">Sale</div></div>
+                                        @endif
                                         <div class="single-item-header">
-                                            <a href="{{route('product_detail',[$pro ->id])}}"><img src="uploads/product/{{$pro -> image}}" alt="" width="150px" height="300px"></a>
+                                            <a href="product.html"><img src="uploads/product/{{$new->image}}" alt="" width="200px" height="160px"></a>
                                         </div>
                                         <div class="single-item-body">
-                                            <p class="single-item-title">{{$pro -> name}}</p>
+                                            <p class="single-item-title">{{$new->name}}</p>
                                             <p class="single-item-price">
-                                                    <span class="flash-del">{{$pro -> price}}$</span>
-                                                    <span class="flash-sale">{{$pro -> promotion_price}}$</span>
+                                                @if($new->promotion_price == 0)
+                                                    <span class="flash-del">{{$new->price}}$</span>
+                                                @else
+                                                    <span class="flash-del">{{$new->price}}$</span>
+                                                    <span class="flash-sale">{{$new->promotion_price}}$</span>
+                                                @endif
                                             </p>
                                         </div>
                                         <div class="single-item-caption">
                                             <a class="add-to-cart pull-left" href="shopping_cart.html"><i class="fa fa-shopping-cart"></i></a>
-                                            <a class="beta-btn primary" href="{{route('product_detail',[$pro ->id])}}">Details <i class="fa fa-chevron-right"></i></a>
+                                            <a class="beta-btn primary" href="{{ route('product_detail', ['id' => $new->id]) }}">Details <i class="fa fa-chevron-right"></i></a>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+
+                        <div class="row">
+                            @foreach($promotion_product as $pro)
+                                <div class="col-sm-3">
+                                    <div class="single-item">
+                                        <div class="ribbon-wrapper"><div class="ribbon sale">Sale</div></div>
+                                        <div class="single-item-header">
+                                            <a href="product.html"><img src="uploads/product/{{$pro->image}}" alt="" width="150px" height="300px"></a>
+                                        </div>
+                                        <div class="single-item-body">
+                                            <p class="single-item-title">{{$pro->name}}</p>
+                                            <p class="single-item-price">
+                                                <span class="flash-del">{{$pro->price}}$</span>
+                                                <span class="flash-sale">{{$pro->promotion_price}}$</span>
+                                            </p>
+                                        </div>
+                                        <div class="single-item-caption">
+                                            <a class="add-to-cart pull-left" href="shopping_cart.html"><i class="fa fa-shopping-cart"></i></a>
+                                            <a class="beta-btn primary" href="{{ route('product_detail', ['id' => $pro->id]) }}">Details <i class="fa fa-chevron-right"></i></a>
                                             <div class="clearfix"></div>
                                         </div>
                                     </div>
@@ -227,7 +381,6 @@
             <div class="col-sm-3">
                 <div class="widget">
                     <h4 class="widget-title">Instagram Feed</h4>
-                    <img src="uploads/logo.png">
                     <div id="beta-instagram-feed"><div></div></div>
                 </div>
             </div>

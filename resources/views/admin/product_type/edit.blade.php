@@ -51,22 +51,23 @@
     <div class="main-content">
         <div class="section__content section__content--p30">
             <div class="container-fluid">
-                <h4> Add Product types
+                <h4> Edit Product type
                     <a href="{{ url('product_types') }}" class="btn btn-primary float-end">Back</a>
                 </h4>
             </div>
             <div class="card-body">
-                <form action="{{ url('product_types/create') }}" method="POST">
+                <form action="{{ url('product_types/'.$type->id.'/edit') }}" method="POST">
                     @csrf
+                    @method('PUT')
 
                     <div class="mb-3">
                         <label>Name</label>
-                        <input type="text" name="name" class="form-control" value="{{ old('name') }}"/>
+                        <input type="text" name="name" class="form-control" value="{{ $type->name }}"/>
                         @error('name')<span class="text-danger">{{ $message }}</span>@enderror
                     </div>
 
                     <div class="mb-3">
-                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
                     </div>
                 </form>
             </div>

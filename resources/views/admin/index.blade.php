@@ -31,17 +31,11 @@
                                 @foreach ($admins as $item)
                                     <tr>
                                         <td>{{$item->id}}</td>
-                                        <td>{{$item->admin_name}}</td>
-                                        <td>{{$item->admin_phone_number}}</td>
-                                        <td>{{$item->admin_email}}</td>
-                                        <td>{{$item->admin_password}}</td>
-                                        <td>
-                                            @if ($item->is_active)
-                                                Active
-                                            @else
-                                                In-Active
-                                            @endif
-                                        </td>
+                                        <td>{{$item->name}}</td>
+                                        <td>{{$item->phone_number}}</td>
+                                        <td>{{$item->email}}</td>
+                                        <td>{{$item->password}}</td>
+
                                         <td>
                                             <a href="{{ url('admins/'.$item->id.'/edit')}}" class="btn btn-primary mx-2">Edit</a>
 

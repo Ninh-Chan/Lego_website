@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\slide;
 use http\Env\Request;
-use App\Models\Type;
+use App\Models\ProductType;
 
 class HomeController extends Controller
 {
@@ -19,12 +19,12 @@ class HomeController extends Controller
     public function productDetail($id)
     {
         $pro = Product::find($id);
-    return view('customers.chitietsanpham',compact('pro'));
+        return view('customers.chitietsanpham', compact('pro'));
     }
     public function getType($type)
     {
         $sp_loai = Product::where('id',$type)->paginate(12);
-        $loai = Type::all();
-return view('customers.page_product_type',compact('sp_loai','loai'));
+        $loai = ProductType::all();
+        return view('customers.page_product_type',compact('sp_loai','loai'));
     }
 }
