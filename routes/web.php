@@ -6,7 +6,54 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Middleware\CustomerLoginChecking;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AdminAuthController;
+//ADMIN
+Route::get('brands', [App\Http\Controllers\BrandController::class, 'index'])->middleware('Logged');
+Route::get('brands/create', [App\Http\Controllers\BrandController::class, 'create'])->middleware('Logged');
+Route::post('brands/create', [App\Http\Controllers\BrandController::class, 'store'])->middleware('Logged');
+Route::get('brands/{id}/edit', [App\Http\Controllers\BrandController::class, 'edit'])->middleware('Logged');
+Route::put('brands/{id}/edit', [App\Http\Controllers\BrandController::class, 'update'])->middleware('Logged');
+Route::get('brands/{id}/delete', [App\Http\Controllers\BrandController::class, 'destroy'])->middleware('Logged');
 
+Route::get('admins', [App\Http\Controllers\AdminController::class, 'index'])->middleware('Logged');
+Route::get('admins/create', [App\Http\Controllers\AdminController::class, 'create'])->middleware('Logged');
+Route::post('admins/create', [App\Http\Controllers\AdminController::class, 'store'])->middleware('Logged');
+Route::get('admins/{id}/edit', [App\Http\Controllers\AdminController::class, 'edit'])->middleware('Logged');
+Route::put('admins/{id}/edit', [App\Http\Controllers\AdminController::class, 'update'])->middleware('Logged');
+Route::get('admins/{id}/delete', [App\Http\Controllers\AdminController::class, 'destroy'])->middleware('Logged');
+
+Route::get('product_types', [App\Http\Controllers\ProductTypeController::class, 'index'])->middleware('Logged');
+Route::get('product_types/create', [App\Http\Controllers\ProductTypeController::class, 'create'])->middleware('Logged');
+Route::post('product_types/create', [App\Http\Controllers\ProductTypeController::class, 'store'])->middleware('Logged');
+Route::get('product_types/{id}/edit', [App\Http\Controllers\ProductTypeController::class, 'edit'])->middleware('Logged');
+Route::put('product_types/{id}/update', [App\Http\Controllers\ProductTypeController::class, 'update'])->middleware('Logged');
+Route::get('product_types/{id}/delete', [App\Http\Controllers\ProductTypeController::class, 'destroy'])->middleware('Logged');
+
+Route::get('products', [App\Http\Controllers\ProductController::class, 'index'])->middleware('Logged');
+Route::get('products/create', [App\Http\Controllers\ProductController::class, 'create'])->middleware('Logged');
+Route::post('products/create', [App\Http\Controllers\ProductController::class, 'store'])->middleware('Logged');
+Route::get('products/{id}/edit', [App\Http\Controllers\ProductController::class, 'edit'])->middleware('Logged');
+Route::put('products/{id}/update', [App\Http\Controllers\ProductController::class, 'update'])->middleware('Logged');
+Route::get('products/{id}/delete', [App\Http\Controllers\ProductController::class, 'destroy'])->middleware('Logged');
+
+
+Route::get('customers', [App\Http\Controllers\CustomerController::class, 'index'])->middleware('Logged');
+Route::get('customers/create', [App\Http\Controllers\CustomerController::class, 'create'])->middleware('Logged');
+Route::post('customers/create', [App\Http\Controllers\CustomerController::class, 'store'])->middleware('Logged');
+Route::get('customers/{id}/edit', [App\Http\Controllers\CustomerController::class, 'edit'])->middleware('Logged');
+Route::put('customers/{id}/edit', [App\Http\Controllers\CustomerController::class, 'update'])->middleware('Logged');
+Route::get('customers/{id}/delete', [App\Http\Controllers\CustomerController::class, 'destroy'])->middleware('Logged');
+
+
+Route::get('/dashboard', [App\Http\Controllers\AdminPanelController::class, 'index'])->middleware('Logged');
+Route::get('/adminlogin', [App\Http\Controllers\AdminAuthController::class,'adminlogin']);
+Route::post('/adminlogin_process', [App\Http\Controllers\AdminAuthController::class,'loginprocess'])->name('loginprocess');
+Route::get('/logout', [App\Http\Controllers\AdminAuthController::class,'logout']);
+
+
+
+//CUSTOMER
 Route::get('/', function () {
     return view('customers.index');
 })->name('home');
@@ -15,35 +62,7 @@ Route::get('/index', function () {
     return view('customers.index');
 })->name('index_page');
 
-Route::get('/product', [ProductController::class, 'index'])->name('product');
 
-Route::get('brands', [App\Http\Controllers\BrandController::class, 'index']);
-Route::get('brands/create', [App\Http\Controllers\BrandController::class, 'create']);
-Route::post('brands/create', [App\Http\Controllers\BrandController::class, 'store']);
-Route::get('brands/{id}/edit', [App\Http\Controllers\BrandController::class, 'edit']);
-Route::put('brands/{id}/edit', [App\Http\Controllers\BrandController::class, 'update']);
-Route::get('brands/{id}/delete', [App\Http\Controllers\BrandController::class, 'destroy']);
-
-Route::get('admins', [App\Http\Controllers\AdminController::class, 'index']);
-Route::get('admins/create', [App\Http\Controllers\AdminController::class, 'create']);
-Route::post('admins/create', [App\Http\Controllers\AdminController::class, 'store']);
-Route::get('admins/{id}/edit', [App\Http\Controllers\AdminController::class, 'edit']);
-Route::put('admins/{id}/edit', [App\Http\Controllers\AdminController::class, 'update']);
-Route::delete('admins/{id}/delete', [App\Http\Controllers\AdminController::class, 'destroy']);
-
-Route::get('product_types', [App\Http\Controllers\ProductTypeController::class, 'index']);
-Route::get('product_types/create', [App\Http\Controllers\ProductTypeController::class, 'create']);
-Route::post('product_types/create', [App\Http\Controllers\ProductTypeController::class, 'store']);
-Route::get('product_types/{id}/edit', [App\Http\Controllers\ProductTypeController::class, 'edit']);
-Route::put('product_types/{id}/edit', [App\Http\Controllers\ProductTypeController::class, 'update']);
-Route::get('product_types/{id}/delete', [App\Http\Controllers\ProductTypeController::class, 'destroy']);
-
-Route::get('products', [App\Http\Controllers\ProductController::class, 'index']);
-Route::get('products/create', [App\Http\Controllers\ProductController::class, 'create']);
-Route::post('products/create', [App\Http\Controllers\ProductController::class, 'store']);
-Route::get('products/{id}/edit', [App\Http\Controllers\ProductController::class, 'edit']);
-Route::put('products/{id}/update', [App\Http\Controllers\ProductController::class, 'update']);
-Route::get('products/{id}/delete', [App\Http\Controllers\ProductController::class, 'destroy']);
 
 
 Route::middleware(CustomerLoginChecking::class)->group(function () {
