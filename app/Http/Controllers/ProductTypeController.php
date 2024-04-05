@@ -10,13 +10,13 @@ class ProductTypeController extends Controller
     public function index()
     {
         $types = ProductType::get();
-        return view('admin.product_type.index', compact('types'));
+        return view('admin.type.index', compact('types'));
     }
 
     // Hiển thị biểu mẫu tạo mới admin_manage
     public function create()
     {
-        return view('admin.product_type.create');
+        return view('admin.type.create');
     }
 
     // Lưu một admin_manage mới vào cơ sở dữ liệu
@@ -39,7 +39,7 @@ class ProductTypeController extends Controller
     public function edit(int $id)
     {
         $type = ProductType::findOrFail($id);
-        return view('admin.product_type.edit', compact('type'));
+        return view('admin.type.edit', compact('type'));
     }
 
     // Cập nhật thông tin của admin_manage vào cơ sở dữ liệu
@@ -56,7 +56,7 @@ class ProductTypeController extends Controller
         return redirect()->back()->with('status', 'Product type Updated !');
     }
 
-    // Xóa một admin_manage khỏi cơ sở dữ liệu
+        // Xóa một admin_manage khỏi cơ sở dữ liệu
     public function destroy(int $id)
     {
         $type = ProductType::findOrFail($id);
