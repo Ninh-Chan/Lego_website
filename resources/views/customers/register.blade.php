@@ -10,51 +10,51 @@
 <div class="container">
     <div class="title">Registration</div>
     <div class="content">
-        <form action="{{route('customers.processingRegister')}}" enctype="multipart/form-data">
+        <form method="post" action="{{route('customers.processingRegister')}}" enctype="multipart/form-data">
             @csrf
             <div class="user-details">
                 <div class="input-box">
                     <span class="details">Name</span>
-                    <input type="text" placeholder="Enter your name" name="customer_name" id="customer_name"
-                           value="{{old('customer_name')}}" required>
-                    @if($errors->has('customer_name'))
-                        {{ $errors->first('customer_name') }}
+                    <input type="text" placeholder="Enter your name" name="name" id="name"
+                           value="{{old('name')}}" required>
+                    @if($errors->has('name'))
+                        {{ $errors->first('name') }}
                     @endif
                 </div>
 
                 <div class="input-box">
                     <span class="details">Email</span>
-                    <input type="email" placeholder="Enter your email" name="customer_email" id="customer_email"
-                           value="{{old('customer_email')}}"required>
-                    @if($errors->has('customer_email'))
-                        {{ $errors->first('customer_email') }}
+                    <input type="email" placeholder="Enter your email" name="email" id="email"
+                           value="{{old('email')}}" required>
+                    @if($errors->has('email'))
+                        {{ $errors->first('email') }}
                     @endif
                 </div>
 
                 <div class="input-box">
                     <span class="details">Phone Number</span>
-                    <input type="number" placeholder="Enter your number" name="customer_phone_number" id="customer_phone_number"
-                           value="{{old('customer_phone_number')}}" required>
-                    @if($errors->has('customer_phone_number'))
-                        {{ $errors->first('customer_phone_number') }}
+                    <input type="number" placeholder="Enter your number" name="phone_number" id="phone_number"
+                           value="{{old('phone_number')}}" required>
+                    @if($errors->has('phone_number'))
+                        {{ $errors->first('phone_number') }}
                     @endif
                 </div>
 
                 <div class="input-box">
                     <span class="details">Address</span>
-                    <input type="text" placeholder="Enter your address" name="customer_address" id="customer_address"
-                           value="{{old('customer_address')}}" required>
-                    @if($errors->has('customer_address'))
-                        {{ $errors->first('customer_address') }}
+                    <input type="text" placeholder="Enter your address" name="address" id="address"
+                           value="{{old('address')}}" required>
+                    @if($errors->has('address'))
+                        {{ $errors->first('address') }}
                     @endif
                 </div>
 
                 <div class="input-box">
                     <span class="details">Password</span>
-                    <input type="password" placeholder="Enter your password" name="customer_password" id="customer_password"
-                           value="{{old('customer_password')}}"required>
-                    @if($errors->has('customer_password'))
-                        {{ $errors->first('customer_password') }}
+                    <input type="password" placeholder="Enter your password" name="password" id="password"
+                           value="{{old('password')}}" required>
+                    @if($errors->has('password'))
+                        {{ $errors->first('password') }}
                     @endif
                 </div>
 
@@ -68,8 +68,6 @@
                 </div>
             </div>
 
-            <input class="hidden invisible opacity-0" type="hidden"
-                   name="status" value="1" readonly>
 
             <div class="button">
                 <input type="submit" value="Register">

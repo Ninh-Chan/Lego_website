@@ -5,18 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class CustomerController
 {
     public function index()
     {
+        $loginemail=Session::get('loginemail');
+        $loginname=Session::get('loginname');
         $customers = Customer::get();
-        return view('admin.customer.index', compact('customers'));
+        return view('admin.customer.index', compact('customers','loginemail','loginname'));
     }
 
     public function create()
     {
-        return view('admin.customer.create');
+        $loginemail=Session::get('loginemail');
+        $loginname=Session::get('loginname');
+        return view('admin.customer.create',compact('loginemail','loginname'));
     }
 
     public function store(Request $request)
@@ -43,9 +48,11 @@ class CustomerController
 
     public function edit(int $id)
     {
+        $loginemail=Session::get('loginemail');
+        $loginname=Session::get('loginname');
         $customer = Customer::findOrFail($id);
         // return $brand;
-        return view('admin.customer.edit', compact('customer'));
+        return view('admin.customer.edit', compact('customer','loginemail','loginname'));
     }
 
     public function update(Request $request, int $id)

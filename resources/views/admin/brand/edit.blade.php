@@ -38,48 +38,45 @@
 </head>
 
 <body class="animsition">
-    <!-- MENU SIDEBAR-->
-    @include('layouts.header_admin2')
+<!-- MENU SIDEBAR-->
+@include('layouts.header_admin2')
 
-    @include('layouts.sidebar_admin2')
-    <!-- END MENU SIDEBAR-->
+@include('layouts.sidebar_admin2')
+<!-- END MENU SIDEBAR-->
 
-    <!-- PAGE CONTAINER-->
-        <!-- HEADER DESKTOP-->
+<!-- PAGE CONTAINER-->
+<!-- HEADER DESKTOP-->
 
 
-        <div class="main-content">
-                <div class="container-fluid">
-                        <h4> Edit Brands
-                            <a href="{{ url('categories') }}" class="btn btn-primary float-end">Back</a>
-                        </h4>
-                    </div>
-                        <form action="{{ url('categories/'.$brand->id.'/edit') }}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            @method('PUT')
+<div class="main-content">
+    <div class="container-fluid">
+        <h4> Edit Brands
+            <a href="{{ url('brands') }}" class="btn btn-primary float-end">Back</a>
+        </h4>
+    </div>
+    <form action="{{ url('brands/'.$brand->id.'/edit') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        @method('PUT')
 
-                            <div class="mb-3">
-                                <label>Name</label>
-                                <input type="text" name="name" class="form-control" value="{{ $brand->name }}"/>
-                                @error('name')<span class="text-danger">{{ $message }}</span>@enderror
-                            </div>
-                            <div class="mb-3">
-                                <label>Status</label>
-                                <input type="checkbox" name="is_active" {{ $brand->is_active == true ? 'checked':'' }}/>
-                                @error('is_active')<span class="text-danger">{{ $message }}</span>@enderror
-                            </div>
-                            <div class="mb-3">
-                                <label>Upload File/Image</label>
-                                <input type="file" name="image" class="form-control"/>
-                            </div>
-                            <div class="mb-3">
-                                <button type="submit" class="btn btn-primary">Update</button>
-                            </div>
-                        </form>
+        <div class="mb-3">
+            <label>Name</label>
+            <input type="text" name="name" class="form-control" value="{{ $brand->name }}"/>
+            @error('name')<span class="text-danger">{{ $message }}</span>@enderror
         </div>
 
-            <!-- END MAIN CONTENT-->
-            <!-- END PAGE CONTAINER-->
+        <div class="mb-3">
+            <label>Upload File/Image</label>
+            <input type="file" name="image" class="form-control"/>
+        </div>
+
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+    </form>
+</div>
+
+<!-- END MAIN CONTENT-->
+<!-- END PAGE CONTAINER-->
 
 
 

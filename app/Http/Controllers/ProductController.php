@@ -7,24 +7,29 @@ use App\Models\Brand;
 use App\Models\ProductType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
 {
     public function index()
     {
+        $loginemail=Session::get('loginemail');
+        $loginname=Session::get('loginname');
         $products = DB::table("products")
             ->join("brands", "brands.id", "=", "products.brand_id")
             ->join("product_types","product_types.id","=","products.product_type_id")
             ->select("products.*", "brands.name AS brand","product_types.name AS type")
             ->get();
-        return view('admin.product.index', compact('products'));
+        return view('admin.product.index', compact('products','loginemail','loginname'));
     }
 
     public function create()
     {
+        $loginemail=Session::get('loginemail');
+        $loginname=Session::get('loginname');
         $brands = Brand::get();
         $types = ProductType::get();
-        return view('admin.product.create',compact('brands','types'));
+        return view('admin.product.create',compact('brands','types','loginemail','loginname'));
     }
 
     public function store(Request $request)
@@ -66,9 +71,11 @@ class ProductController extends Controller
 
     public function edit(int $id)
     {
+        $loginemail=Session::get('loginemail');
+        $loginname=Session::get('loginname');
         $product = Product::findOrFail($id);
         // return $brand;
-        return view('admin.product.edit', compact('product'));
+        return view('admin.product.edit', compact('product','loginemail','loginname'));
     }
 
     public function update(Request $request, int $id)

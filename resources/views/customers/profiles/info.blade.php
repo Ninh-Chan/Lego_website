@@ -21,27 +21,27 @@
                         <label for="first_name" class="form-label">User Name</label>
                         <input type="text" class="form-control" id="first_name"
                                name="first_name"
-                               value="{{$customer->customer_name}}">
+                               value="{{$customers->name}}">
                     </div>
 
                     <div class="col-md-6">
                         <label for="email" class="form-label">Email</label>
                         <input type="email" class="form-control" id="email"
                                name="email"
-                               value="{{$customer->customer_email}}">
+                               value="{{$customers->email}}">
                     </div>
                     <div class="col-md-6">
                         <label for="phone_number" class="form-label">Phone number</label>
                         <input type="number" class="form-control" id="phone_number"
                                name="phone_number"
-                               value="{{$customer->customer_email}}">
+                               value="{{$customers->phone_number}}">
                     </div>
 
                     <div class="col-12">
                         <label for="address" class="form-label">Address</label>
                         <input type="text" class="form-control" id="address"
                                name="address"
-                               value="{{$customer->customer_address}}">
+                               value="{{$customers->address}}">
                     </div>
 
                     <div class="col-12">

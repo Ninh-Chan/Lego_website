@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="au theme template">
-    <meta name="author" content="">
+    <meta name="author" content="Hau Nguyen">
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <!-- Fontfaces CSS-->
-    <link href="css/php css/font-face.css" rel="stylesheet" media="all">
+    <link href="css/font-face.css" rel="stylesheet" media="all">
     <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
     <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
     <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
@@ -38,15 +38,9 @@
 </head>
 
 <body class="animsition">
-@if (session('status'))
-    <div class="alert alert-success">{{ session('status')}}</div>
-@endif
-
 <div class="page-wrapper">
 
     <!-- MENU SIDEBAR-->
-
-
     @include('layouts.sidebar_admin')
     <!-- END MENU SIDEBAR-->
 
@@ -54,15 +48,16 @@
     <div class="page-container">
         <!-- HEADER DESKTOP-->
         @include('layouts.header_admin')
+        <!-- HEADER DESKTOP-->
+
         <!-- MAIN CONTENT-->
         <div class="main-content">
             <div class="section__content section__content--p30">
                 <div class="container-fluid">
-                    <a href="{{ url('brands/create') }}" class="au-btn au-btn-icon au-btn--blue">
-                        <i style="color: white" class="zmdi zmdi-plus"></i>
-                        <span style="color: white">add brand</span></a>
-                    <br>
-                    <br>
+                    <h4> Product types
+                        <a href="{{ url('product_types/create') }}" class="btn btn-primary float-end">Add types</a>
+                    </h4>
+
                     <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
@@ -72,17 +67,14 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach ($brands as $item)
+                        @foreach ($types as $type)
                             <tr>
-                                <td>{{$item->id}}</td>
-                                <td>{{$item->name}}</td>
+                                <td>{{$type->id}}</td>
+                                <td>{{$type->name}}</td>
                                 <td>
-                                    <img src="{{ asset($item->image) }}" style="width: 130px; height: 100px" alt="">
-                                </td>
-                                <td>
-                                    <a href="{{ url('brands/'.$item->id.'/edit')}}" class="btn btn-primary mx-2">Edit</a>
+                                    <a href="{{ url('product_types/'.$type->id.'/edit')}}" class="btn btn-primary mx-2">Edit</a>
 
-                                    <a href="{{ url('brands/'.$item->id.'/delete') }}"
+                                    <a href="{{ url('product_types/'.$type->id.'/delete') }}"
                                        class="btn btn-danger mx-1"
                                        onclick="return confirm('Are you sure ?')"
                                     >Delete</a>
@@ -99,7 +91,9 @@
     </div>
 </div>
 
-<!-- Jquery JS-->
+
+
+
 <script src="vendor/jquery-3.2.1.min.js"></script>
 <!-- Bootstrap JS-->
 <script src="vendor/bootstrap-4.1/popper.min.js"></script>
@@ -126,4 +120,3 @@
 </body>
 
 </html>
-

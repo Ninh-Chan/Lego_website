@@ -4,23 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Admin;
-use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
     public function index()
     {
         $admins = Admin::get();
-        return view('admin_manage.index', compact('admins'));
+        return view('admin.index', compact('admins'));
     }
 
-    // Hiển thị biểu mẫu tạo mới admin_manage
+    // Hiển thị biểu mẫu tạo mới admin
     public function create()
     {
-        return view('admin_manage.create');
+        return view('admin.create');
     }
 
-    // Lưu một admin_manage mới vào cơ sở dữ liệu
+    // Lưu một admin mới vào cơ sở dữ liệu
     public function store(Request $request)
     {
         // Validate dữ liệu
@@ -40,19 +39,19 @@ class AdminController extends Controller
             'is_active' => $request->is_active == true ? 1:0,
         ]);
 
-        // Chuyển hướng đến trang hiển thị danh sách admin_manage
+        // Chuyển hướng đến trang hiển thị danh sách admin
         return redirect('admins/create')->with('status','Admin Created !');
     }
 
-    // Hiển thị thông tin chi tiết của một admin_manage
+    // Hiển thị thông tin chi tiết của một admin
     public function edit(int $id)
     {
         $admin = Admin::findOrFail($id);
         // return $brand;
-        return view('admin_manage.edit', compact('admin'));
+        return view('admin.edit', compact('admin'));
     }
 
-    // Cập nhật thông tin của admin_manage vào cơ sở dữ liệu
+    // Cập nhật thông tin của admin vào cơ sở dữ liệu
     public function update(Request $request, int $id)
     {
         $request->validate([
@@ -74,7 +73,7 @@ class AdminController extends Controller
         return redirect()->back()->with('status', 'Admin Updated !');
     }
 
-        // Xóa một admin_manage khỏi cơ sở dữ liệu
+        // Xóa một admin khỏi cơ sở dữ liệu
     public function destroy(int $id)
     {
         $admin = Admin::findOrFail($id);
