@@ -14,18 +14,18 @@
                         <div class="account-item clearfix js-item-menu">
 
                             <div class="content">
-                                <a class="js-acc-btn" href="#">Admin</a>
+                                <a class="js-acc-btn" href="#">{{$loginname}}</a>
                             </div>
                             <div class="account-dropdown js-dropdown">
                                 <div class="info clearfix">
                                         <h5 class="name">
-                                            <a style="color: black" href="#">Admin</a>
+                                            <a style="color: black" href="#">{{$loginname}}</a>
                                         </h5>
-                                        <span class="email">Admin@example.com</span>
+                                        <span class="email">{{$loginemail}}</span>
                                 </div>
 
                                 <div class="account-dropdown__footer">
-                                    <a href="#">
+                                    <a href="logout">
                                         <i class="zmdi zmdi-power"></i>Logout</a>
                                 </div>
                             </div>
