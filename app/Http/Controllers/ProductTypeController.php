@@ -4,13 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ProductType;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class ProductTypeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $types = ProductType::get();
-        return view('admin.type.index', compact('types'));
+        $search='%%';
+        if($request->search){
+            $search='%'.$request->search.'%';
+        }
+        $loginemail=Session::get('loginemail');
+        $loginname=Session::get('loginname');
+        $types = DB::table('product_types')
+            ->where('name','like',$search)
+            ->get();
+        return view('admin.type.index', compact('types','loginemail','loginname'));
     }
 
     // Hiển thị biểu mẫu tạo mới admin_manage

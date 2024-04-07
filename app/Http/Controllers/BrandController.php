@@ -4,17 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 use function PHPUnit\Framework\once;
 
 class BrandController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $search='%%';
+        if($request->search){
+            $search='%'.$request->search.'%';
+        }
         $loginemail=Session::get('loginemail');
         $loginname=Session::get('loginname');
-        $brand = Brand::get();
+        $brand = DB::table('brands')
+            ->where('name','like',$search)
+        ->get();
         return view('admin.brand.index', compact('brand','loginemail','loginname'));
 
     }

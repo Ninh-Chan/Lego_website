@@ -11,14 +11,19 @@ use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $search='%%';
+        if($request->search){
+            $search='%'.$request->search.'%';
+        }
         $loginemail=Session::get('loginemail');
         $loginname=Session::get('loginname');
         $products = DB::table("products")
             ->join("brands", "brands.id", "=", "products.brand_id")
             ->join("product_types","product_types.id","=","products.product_type_id")
             ->select("products.*", "brands.name AS brand","product_types.name AS type")
+            ->where('products.name','like',$search)
             ->get();
         return view('admin.product.index', compact('products','loginemail','loginname'));
     }

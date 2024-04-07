@@ -4,16 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class CustomerController
 {
-    public function index()
+    public function index(Request $request)
     {
+        $search='%%';
+        if($request->search){
+            $search='%'.$request->search.'%';
+        }
         $loginemail=Session::get('loginemail');
         $loginname=Session::get('loginname');
-        $customers = Customer::get();
+        $customers = DB::table('customers')
+            ->where('name','like',$search)
+            ->get();
         return view('admin.customer.index', compact('customers','loginemail','loginname'));
     }
 
