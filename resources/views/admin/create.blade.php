@@ -25,7 +25,8 @@
                             <div class="mb-4">
                                 <label>Admin Name</label>
                                 <input type="text" name="name" class="form-control"
-                                       value="{{ old('v') }}" required>
+                                       value="{{ old('name
+                                ') }}" required>
                                 @error('name')<span class="text-danger">{{ $message }}</span>@enderror
                             </div>
 
