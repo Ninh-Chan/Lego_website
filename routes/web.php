@@ -9,7 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminAuthController;
 //ADMIN
-Route::get('brands', [App\Http\Controllers\BrandController::class, 'index'])->middleware('Logged');
+Route::get('brands/index', [App\Http\Controllers\BrandController::class, 'index'])->middleware('Logged');
 Route::get('brands/create', [App\Http\Controllers\BrandController::class, 'create'])->middleware('Logged');
 Route::post('brands/create', [App\Http\Controllers\BrandController::class, 'store'])->middleware('Logged');
 Route::get('brands/{id}/edit', [App\Http\Controllers\BrandController::class, 'edit'])->middleware('Logged');
@@ -23,14 +23,14 @@ Route::get('admins/{id}/edit', [App\Http\Controllers\AdminController::class, 'ed
 Route::put('admins/{id}/edit', [App\Http\Controllers\AdminController::class, 'update'])->middleware('Logged');
 Route::get('admins/{id}/delete', [App\Http\Controllers\AdminController::class, 'destroy'])->middleware('Logged');
 
-Route::get('product_types', [App\Http\Controllers\ProductTypeController::class, 'index'])->middleware('Logged');
+Route::get('product_types/index', [App\Http\Controllers\ProductTypeController::class, 'index'])->middleware('Logged');
 Route::get('product_types/create', [App\Http\Controllers\ProductTypeController::class, 'create'])->middleware('Logged');
 Route::post('product_types/create', [App\Http\Controllers\ProductTypeController::class, 'store'])->middleware('Logged');
 Route::get('product_types/{id}/edit', [App\Http\Controllers\ProductTypeController::class, 'edit'])->middleware('Logged');
 Route::put('product_types/{id}/update', [App\Http\Controllers\ProductTypeController::class, 'update'])->middleware('Logged');
 Route::get('product_types/{id}/delete', [App\Http\Controllers\ProductTypeController::class, 'destroy'])->middleware('Logged');
 
-Route::get('products', [App\Http\Controllers\ProductController::class, 'index'])->middleware('Logged');
+Route::get('products/index', [App\Http\Controllers\ProductController::class, 'index'])->middleware('Logged');
 Route::get('products/create', [App\Http\Controllers\ProductController::class, 'create'])->middleware('Logged');
 Route::post('products/create', [App\Http\Controllers\ProductController::class, 'store'])->middleware('Logged');
 Route::get('products/{id}/edit', [App\Http\Controllers\ProductController::class, 'edit'])->middleware('Logged');
@@ -38,12 +38,13 @@ Route::put('products/{id}/update', [App\Http\Controllers\ProductController::clas
 Route::get('products/{id}/delete', [App\Http\Controllers\ProductController::class, 'destroy'])->middleware('Logged');
 
 
-Route::get('customers', [App\Http\Controllers\CustomerController::class, 'index'])->middleware('Logged');
+Route::get('customers/index', [App\Http\Controllers\CustomerController::class, 'index'])->middleware('Logged');
 Route::get('customers/create', [App\Http\Controllers\CustomerController::class, 'create'])->middleware('Logged');
 Route::post('customers/create', [App\Http\Controllers\CustomerController::class, 'store'])->middleware('Logged');
 Route::get('customers/{id}/edit', [App\Http\Controllers\CustomerController::class, 'edit'])->middleware('Logged');
 Route::put('customers/{id}/edit', [App\Http\Controllers\CustomerController::class, 'update'])->middleware('Logged');
 Route::get('customers/{id}/delete', [App\Http\Controllers\CustomerController::class, 'destroy'])->middleware('Logged');
+
 
 
 Route::get('/dashboard', [App\Http\Controllers\AdminPanelController::class, 'index'])->middleware('Logged');
